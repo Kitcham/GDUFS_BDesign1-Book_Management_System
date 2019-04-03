@@ -18,8 +18,8 @@ int main() {
 	std::cout << "5.  删除图书信息\n";
 	std::cout << "6.  按价格升序重排图书信息\n";
 	std::cout << "7.  按书名模糊检索图书\n";
-	std::cout << "8.  出借归还图书\n";
-	std::cout << "9.  库存管理\n";
+	std::cout << "8.  出借图书\n";
+	std::cout << "9.  归还图书\n";
 	std::cout << "10. 输出现有图书信息\n";
 	std::cout << "11. 存盘现有图书信息\n";
 	std::cout << "0.  退出系统\n\n";
@@ -105,9 +105,9 @@ int main() {
 			int n; int store_num;
 			std::cin >> n;
 			store_num = Search_book(L, n);
-			if (store_num = -1)
+			if (store_num == -1)
 			{
-				std::cout << "您的序号超范围哦！\n" << std::endl;
+				std::cout << "您的序号超范围！\n" << std::endl;
 				break;
 			}
 			else if (store_num != 0)
