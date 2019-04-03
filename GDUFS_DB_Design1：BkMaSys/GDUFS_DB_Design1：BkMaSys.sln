@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDUFS_DB_Design1：BkMaSys", "GDUFS_DB_Design1：BkMaSys\GDUFS_DB_Design1：BkMaSys.vcxproj", "{75AAC82F-0A26-43B0-9131-227678025776}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75AAC82F-0A26-43B0-9131-227678025776}.Debug|x64.ActiveCfg = Debug|x64
+		{75AAC82F-0A26-43B0-9131-227678025776}.Debug|x64.Build.0 = Debug|x64
+		{75AAC82F-0A26-43B0-9131-227678025776}.Debug|x86.ActiveCfg = Debug|Win32
+		{75AAC82F-0A26-43B0-9131-227678025776}.Debug|x86.Build.0 = Debug|Win32
+		{75AAC82F-0A26-43B0-9131-227678025776}.Release|x64.ActiveCfg = Release|x64
+		{75AAC82F-0A26-43B0-9131-227678025776}.Release|x64.Build.0 = Release|x64
+		{75AAC82F-0A26-43B0-9131-227678025776}.Release|x86.ActiveCfg = Release|Win32
+		{75AAC82F-0A26-43B0-9131-227678025776}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73657DAD-FBFE-4786-868F-05A489BA509A}
+	EndGlobalSection
+EndGlobal
