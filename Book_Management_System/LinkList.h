@@ -234,3 +234,167 @@ void FindBk(DuLinkList L, std::string bkt)
 		std::cout << "未找到书目，请核实后重新输入\n";
 	}
 }
+
+void Sort_books_prince(DuLinkList &L)
+{
+	int n = 0;
+	DuLNode* star = L;
+	DuLNode* p_locate, *p_compare, *p_next;
+	p_locate = L->next;
+	p_compare = L->next->next;
+	p_next = L->next->next->next;
+
+	while (p_compare)
+	{
+		while (p_locate->data.price >= p_compare->data.price)
+		{
+			p_locate = p_locate->prior;
+			//cout << n++ << endl;
+		}
+
+		if (p_locate == p_compare->prior&&p_compare->next == NULL)
+		{
+			p_compare = NULL;
+			continue;
+		}
+
+
+		if (p_compare->next != NULL)
+		{
+			p_compare->prior->next = p_compare->next;
+			p_compare->next->prior = p_compare->prior;
+
+
+			p_compare->next = p_locate->next;
+			p_locate->next->prior = p_compare;
+			p_locate->next = p_compare;
+			p_compare->prior = p_locate;
+
+			p_compare = p_next;
+			//			cout << p_locate->data.name << endl;
+			if (p_compare != NULL)
+			{
+				p_next = p_next->next;
+			}
+
+			p_locate = p_compare->prior;
+		}
+
+		else
+
+		{
+			p_compare->prior->next = NULL;
+			p_compare->next = p_locate->next;
+			p_locate->next->prior = p_compare;
+			p_locate->next = p_compare;
+			p_compare->prior = p_locate;
+
+			p_compare = NULL;
+		}
+
+	}
+}
+
+void Change_store(DuLinkList &L, int n, int shuliang)
+{
+	DuLNode* p = L->next;
+	int count1 = 1;
+
+	while ((count1++) != n)
+	{
+		p = p->next;
+	}
+
+	if (shuliang > p->data.number)
+		std::cout << "不好意思，您所借书本的数量超过库存\n" << std::endl;
+
+	else
+	{
+		p->data.number -= shuliang;
+		std::cout << "借出成功\n" << std::endl;
+	}
+}
+
+void Return_book(DuLinkList &L, std::string buku, int num)
+{
+	DuLNode* p = L->next;
+
+	while (p && strcmp(p->data.id.c_str(), buku.c_str()) != 0)
+	{
+		p = p->next;
+	}
+	if (!p)
+	{
+		std::cout << "本书库不存在您这本书，请问您是否要在书库中追加此书" << std::endl;
+		std::cout << "需要请按 1； 不需要请按 2" << std::endl;
+		int choice = 0; int a; Book e;
+		std::cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			std::cout << "请输入您想存放的位置" << std::endl;
+			std::cin >> a;
+			std::cout << "请继续完善书本信息，依次填入：书名， 价格，数量" << std::endl;
+			e.id = buku;
+			std::cin >> e.name >> e.price >> e.number;
+
+			if (ListInsert_DuL(L, a, e))
+				std::cout << "添加成功.\n\n";
+			else
+				std::cout << "添加失败!\n\n";
+			break;
+		case 2:
+			std::cout << "本次操作结束\n" << std::endl;
+			break;
+		}
+	}
+	else
+	{
+		p->data.number += num;
+		std::cout << "已经载入库存！" << std::endl;
+	}
+
+
+}
+
+
+int Search_book(DuLinkList &L, int xvhao)
+{
+	DuLNode* p = L->next;
+	int count = 1;
+	while (p && (count++) < xvhao)
+	{
+		p = p->next;
+	}
+	if (p)
+	{
+		return p->data.number;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+bool Store_the_content(DuLinkList &L)
+{
+	std::ofstream ofile;               //定义输出文件
+	ofile.open("C:\\Users\\SurfacePro3\\source\\repos\\Project13\\Project13\\book.txt");
+	if (!ofile.is_open())
+	{
+		return 0;
+	}
+	else
+	{
+		DuLNode* p = L->next;
+		ofile << std::left << std::setw(15) << "ISBN" << "\t" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "定价" << "\t" << std::left << std::setw(5) << "数量" << std::endl;
+		while (p)
+		{
+			ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+			p = p->next;
+		}
+		ofile.close();
+	}
+}
+
+

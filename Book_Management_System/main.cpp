@@ -5,20 +5,24 @@
 int main() {
 	int a, choose;
 	bool b = true;
+	int count = 1;
 	std::string ISBNTEMP;
 	std::string bknametmp;
 	Book e;
 	DuLinkList L = nullptr, p = nullptr;
 	std::cout << "请输入你所需功能的数字编号\n";
-	std::cout << "1. 新建图书信息列表\n";
-	std::cout << "2. 从 book.txt 中读取图书信息\n";
-	std::cout << "3. 新增图书信息\n";
-	std::cout << "4. 修改图书信息\n";
-	std::cout << "5. 删除图书信息\n";
-	std::cout << "6. 按价格升序重排图书信息\n";
-	std::cout << "7. 按书名模糊检索图书\n";
-	std::cout << "8. 输出现有图书信息\n";
-	std::cout << "0. 退出系统\n\n";
+	std::cout << "1.  新建图书信息列表\n";
+	std::cout << "2.  从 book.txt 中读取图书信息\n";
+	std::cout << "3.  新增图书信息\n";
+	std::cout << "4.  修改图书信息\n";
+	std::cout << "5.  删除图书信息\n";
+	std::cout << "6.  按价格升序重排图书信息\n";
+	std::cout << "7.  按书名模糊检索图书\n";
+	std::cout << "8.  出借归还图书\n";
+	std::cout << "9.  库存管理\n";
+	std::cout << "10. 输出现有图书信息\n";
+	std::cout << "11. 存盘现有图书信息\n";
+	std::cout << "0.  退出系统\n\n";
 
 	choose = -1;
 	while (choose != 0) {
@@ -81,24 +85,79 @@ int main() {
 			else
 				std::cout << "删除失败!\n\n";
 			break;
+		case 6://按价格排序图书
+			std::cout << "以价格升序重排列图书\n";
+			//			DuLinkList y;
+			Sort_books_prince(L);
+			if (L)
+				std::cout << "排序成功!!\n";
+			else
+				std::cout << "不好意思，目前任何图书信息\n";
+			break;
 		case 7: //检索图书
 			std::cout << "请输入一个关键字以检索图书（不含空格）:"; 
 			std::cin >> bknametmp;
 			FindBk(L, bknametmp);
 			break;
-		case 8: //双向链表的输出
+		case 8://出借图书
+		{
+			std::cout << "请输入您想要借的书的序号:" << std::endl;
+			int n; int store_num;
+			std::cin >> n;
+			store_num = Search_book(L, n);
+			if (store_num = -1)
+			{
+				std::cout << "您的序号超范围哦！\n" << std::endl;
+				break;
+			}
+			else if (store_num != 0)
+				std::cout << "本书库存为：\n" << store_num << std::endl;
+			else
+			{
+				std::cout << "本书库存为零\n" << std::endl;
+				break;
+			}
+			std::cout << "您想借的数量：" << std::endl;
+			int shu;
+			std::cin >> shu;
+			Change_store(L, n, shu);
+			break; }
+		case 9:// 归还图书
+		{
+			std::cout << "请输入您要归还的书的ISBN号" << std::endl;
+			std::string buku;
+			std::cin >> buku;
+			int total = 0;
+			std::cout << "请输入您要归还的书的数量" << std::endl;
+			std::cin >> total;
+			Return_book(L, buku, total);
+
+		}
+		case 10: //双向链表的输出
 			std::cout << "当前图书系统信息输出:\n";
 			std::cout << std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
 			//L = new DuLinkList;
 			p = L->next;
 			while (p) {
-				std::cout << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5)<< p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+				//count = 1;
+				std::cout << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
 				p = p->next;
 			}
 			p = Total(L);
 			std::cout << std::left << std::setw(15) << "总计" << std::left << std::setw(50) << " " << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(15) << p->data.number << std::endl;
 			std::cout << std::endl;
 			break;
+		case 11:
+			int result;
+			result = Store_the_content(L);
+			if (!result)
+			{
+				std::cout << "存盘失败\n\n";
+			}
+			else
+			{
+				std::cout << "存盘成功\n\n";
+			}
 		}
 	}
 	return 0;
