@@ -133,20 +133,23 @@ int main() {
 			Return_book(L, buku, total);
 
 		}
-		case 10: //双向链表的输出
+		case 10:
+		{//双向链表的输出
 			std::cout << "当前图书系统信息输出:\n";
-			std::cout << std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
+			std::cout << "序号"<<"\t"<<std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
 			//L = new DuLinkList;
 			p = L->next;
+			int count = 0;
 			while (p) {
 				//count = 1;
-				std::cout << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+				std::cout << ++count << ")" << "\t" << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
 				p = p->next;
 			}
 			p = Total(L);
-			std::cout << std::left << std::setw(15) << "总计" << std::left << std::setw(50) << " " << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(15) << p->data.number << std::endl;
+			std::cout << std::left << std::setw(15) << "总计" << std::left << std::setw(50) << "   " << "\t\t" << std::left << std::setw(5)<< p->data.price << "\t" << std::left << std::setw(15) << p->data.number << std::endl;
 			std::cout << std::endl;
 			break;
+		}
 		case 11:
 			int result;
 			result = Store_the_content(L);
