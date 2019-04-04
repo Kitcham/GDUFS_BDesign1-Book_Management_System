@@ -52,7 +52,8 @@ int main()
 				std::cin.ignore();
 				if (b)                        //b作为标记，仅让提示输出一次
 				{
-					std::cout << "位置非法，请重新输入:"; b = 0;
+					std::cout << "位置非法，请重新输入:"; 
+					b = 0;
 				}
 				std::cin >> a;
 			}
@@ -98,7 +99,7 @@ int main()
 			if (L)
 				std::cout << "排序成功!!\n";
 			else
-				std::cout << "不好意思，目前任何图书信息\n";
+				std::cout << "不好意思，目前不存在任何图书信息\n";
 			break;
 		case 7: //检索图书
 			std::cout << "请输入一个关键字以检索图书（不含空格）:";
@@ -106,7 +107,7 @@ int main()
 			FindBk(L, bknametmp);
 			break;
 		case 8://出借图书
-			std::cout << "请输入您想要借的书的序号:" << std::endl;
+			std::cout << "请输入您想要借的书的序号:";
 			int n; int store_num;
 			std::cin >> n;
 			store_num = Search_book(L, n);
@@ -116,22 +117,22 @@ int main()
 				break;
 			}
 			else if (store_num != 0)
-				std::cout << "本书库存为：\n" << store_num << std::endl;
+				std::cout << "本书库存为：" << store_num;
 			else
 			{
 				std::cout << "本书库存为零\n" << std::endl;
 				break;
 			}
-			std::cout << "您想借的数量：" << std::endl;
+			std::cout << "您想借的数量：";
 			int shu;
 			std::cin >> shu;
 			Change_store(L, n, shu);
 			break;
 		case 9:// 归还图书
-			std::cout << "请输入您要归还的书的ISBN号" << std::endl;
+			std::cout << "请输入您要归还的书的ISBN号:";
 			std::cin >> buku;
 			total = 0;
-			std::cout << "请输入您要归还的书的数量" << std::endl;
+			std::cout << "请输入您要归还的书的数量:";
 			std::cin >> total;
 			Return_book(L, buku, total);
 		case 10://双向链表的输出
