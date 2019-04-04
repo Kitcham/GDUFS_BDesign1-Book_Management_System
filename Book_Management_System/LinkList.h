@@ -167,24 +167,24 @@ DuLNode* FixInfor(DuLinkList L, double pt)  //修改价格
 
 DuLNode* Total(DuLinkList L)    //统计书籍数量
 {
-	DuLinkList s, p;
+	DuLinkList p;
 	double total_price = 0, total_number = 0;
 	p = L->next;  /* 初始化，p指向第一个结点 */
 	while (p && p->next)
-	{ /* 顺指针向后查找，直到p指向的当前元素与e相等或p为空 */
+	{ /* 顺指针向后查找，直到倒数第二个元素 */
 		total_price += p->data.price;
 		total_number += p->data.number;
 		p = p->next;
 	}
-	total_price += p->data.price;
+	total_price += p->data.price; //统计最后一个结点
 	total_number += p->data.number;
-	s = new DuLNode; //生成新结点s
-	s->data.price = total_price; //将结点s数据置为e
-	s->data.number = total_number;
+	//s = new DuLNode; //生成新结点s
+	L->data.price = total_price; //将统计数据放入头结点
+	L->data.number = total_number;
 	//p->next = s;
 	//s->prior = p;//将结点*s插入到p的后面，插入到l中
 	//s->next = null;
-	return s;
+	return L;
 }
 
 char *my_strstr(const char *str, const char *str1) 
@@ -211,7 +211,7 @@ char *my_strstr(const char *str, const char *str1)
 void FindBk(DuLinkList L, std::string bkt)
 {
 	int flag = 0;
-	DuLinkList s, p;
+	DuLinkList p;
 	std::string a, b;
 	p = L->next;  /* 初始化，p指向第一个结点 */
 	std::cout << "已为你找到以下书目：\n";
