@@ -136,10 +136,11 @@ void CreateDuList_L(DuLinkList &L) {
 		p = new DuLNode; //生成新结点
 		file >> p->data.id >> p->data.name >> p->data.price >> p->data.number; //输入元素值
 		p->next = NULL;
-		r->next = p; //插入到表尾
+		r->next = p;
+		p->prior = r;//插入到表尾
 		r = p; //r指向新的尾结点
-		p->prior = L->prior; //插入到表头
-		L->prior = p;
+		//p->prior = L->prior; //插入到表头
+		//L->prior = p;
 		length++;
 	}
 	file.close();
@@ -390,7 +391,11 @@ bool Store_the_content(DuLinkList &L)
 		ofile << std::left << std::setw(15) << "ISBN" << "\t" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "定价" << "\t" << std::left << std::setw(5) << "数量" << std::endl;
 		while (p)
 		{
-			ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+			if (p->next)
+				ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+			else
+				ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number;
+
 			p = p->next;
 		}
 		ofile.close();
