@@ -25,7 +25,7 @@ int main()
 	std::cout << "8.  出借图书\n";
 	std::cout << "9.  归还图书\n";
 	std::cout << "10. 输出现有图书信息\n";
-	std::cout << "11. 存盘现有图书信息\n";
+	std::cout << "11. 存盘现有图书信息到 new book.txt\n";
 	std::cout << "0.  退出系统\n\n";
 
 	choose = -1;
