@@ -143,6 +143,7 @@ int main() {
 			while (p) {
 				//count = 1;
 				std::cout << ++count << ")" << "\t" << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+				std::cout << "----------------------------------------------------------------------------------------------" <<std::endl;
 				p = p->next;
 			}
 			p = Total(L);

@@ -181,9 +181,9 @@ DuLNode* Total(DuLinkList L)    //统计书籍数量
 	s = new DuLNode; //生成新结点s
 	s->data.price = total_price; //将结点s数据置为e
 	s->data.number = total_number;
-	p->next = s;
-	s->prior = p;//将结点*s插入到p的后面，插入到L中
-	s->next = NULL;
+	//p->next = s;
+	//s->prior = p;//将结点*s插入到p的后面，插入到l中
+	//s->next = null;
 	return s;
 }
 
@@ -301,12 +301,12 @@ void Change_store(DuLinkList &L, int n, int shuliang)
 	DuLNode* p = L->next;
 	int count1 = 1;
 
-	while ((count1++) != n)
+	while ((count1++) != n&&p)
 	{
 		p = p->next;
 	}
 
-	if (shuliang > p->data.number)
+	if (shuliang > p->data.number&&p)
 		std::cout << "不好意思，您所借书本的数量超过库存\n" << std::endl;
 
 	else
@@ -380,7 +380,7 @@ int Search_book(DuLinkList &L, int xvhao)
 bool Store_the_content(DuLinkList &L)
 {
 	std::ofstream ofile;               //定义输出文件
-	ofile.open("C:\\Users\\SurfacePro3\\source\\repos\\Project13\\Project13\\book.txt");
+	ofile.open("book.txt");
 	if (!ofile.is_open())
 	{
 		return 0;
@@ -392,12 +392,13 @@ bool Store_the_content(DuLinkList &L)
 		while (p)
 		{
 			if (p->next)
-				ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+				ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number<< std::endl;
 			else
 				ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number;
 
 			p = p->next;
 		}
+
 		ofile.close();
 	}
 }
