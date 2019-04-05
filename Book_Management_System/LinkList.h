@@ -172,11 +172,11 @@ DuLNode* Total(DuLinkList L)    //统计书籍数量
 	p = L->next;  /* 初始化，p指向第一个结点 */
 	while (p && p->next)
 	{ /* 顺指针向后查找，直到倒数第二个元素 */
-		total_price += p->data.price;
+		total_price += p->data.price*p->data.number;
 		total_number += p->data.number;
 		p = p->next;
 	}
-	total_price += p->data.price; //统计最后一个结点
+	total_price += p->data.price*p->data.number; //统计最后一个结点
 	total_number += p->data.number;
 	//s = new DuLNode; //生成新结点s
 	L->data.price = total_price; //将统计数据放入头结点
