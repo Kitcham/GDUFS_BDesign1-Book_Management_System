@@ -8,6 +8,7 @@ int main()
 	bool b = true;
 	int count = 1;
 	int total;
+	int status;
 	std::ofstream writefile;
 	std::string ISBNTEMP;
 	std::string bknametmp;
@@ -61,6 +62,8 @@ int main()
 				std::cout << "请输入书名："; std::cin >> e.name;
 				std::cout << "请输入价格："; std::cin >> e.price;
 				std::cout << "请输入数量："; std::cin >> e.number;
+				status = IfEmpty(L,a);
+				if (!status) break;//判表空
 				if (ListInsert_DuL(L, a, e))
 					std::cout << "新增图书信息成功.\n\n";
 				else

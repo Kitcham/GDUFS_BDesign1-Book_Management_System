@@ -403,4 +403,30 @@ bool Store_the_content(DuLinkList &L)
 	}
 }
 
-
+int IfEmpty(DuLinkList &L, int &a)
+{
+	DuLinkList s;
+	int flag = 0;
+	int cho;
+	if (L->next == NULL)
+	{
+		std::cout << "当前图书信息为空，是否直接在头部插入？\n";
+		std::cout << "按 1 确认在头部插入，按 2 退回到主菜单\n";
+		std::cin >> cho;
+		switch (cho)
+		{
+		case 1:
+			s = new DuLNode;
+			s->next = L->next;
+			L -> next = s;
+			flag = 1;
+			a = 1;
+			std::cout << "正在链表头部插入图书\n";
+			break;
+		case 2:
+			break;
+		}
+	}
+	else flag = 1;
+	return flag;
+}
