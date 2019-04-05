@@ -220,6 +220,7 @@ void FindBk(DuLinkList L, std::string bkt)    //Ä£ºý¼ìË÷Í¼Êé
 void Sort_books_prince(DuLinkList &L)    //¼Û¸ñÉýÐòÅÅÐòÍ¼Êé
 {
 	int n = 0;
+	L->data.price = -1;
 	DuLNode* star = L;
 	DuLNode* p_locate, *p_compare, *p_next;
 	p_locate = L->next;
