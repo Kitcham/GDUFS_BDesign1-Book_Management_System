@@ -9,6 +9,7 @@ int main()
 	int count = 1;
 	int total;
 	int status;
+	int bkcho;
 	std::ofstream writefile;
 	std::string ISBNTEMP;
 	std::string bknametmp;
@@ -41,8 +42,20 @@ int main()
 					std::cout << "成功建立图书信息存储列表，存储结构为双向链表!\n\n";
 				break;
 			case 2: //使用后插法创建双向链表
-				CreateDuList_L(L);
-				std::cout << "读取 book.txt 信息完毕\n\n";
+				std::cout << "请选择你希望读取的txt!\n";
+				std::cout << "按 1 读取 book.txt，按 2 读取 new book read.txt\n\n";
+				std::cin >> bkcho;
+				if (bkcho == 1)
+				{
+					CreateDuList_L(L);
+					std::cout << "读取 book.txt 信息完毕\n\n";
+				}
+				else if (bkcho == 2)
+				{
+					CreateDuList_LN(L);
+					std::cout << "读取 new book read.txt 信息完毕\n\n";
+				}
+				else break;
 				break;
 			case 3: //双向链表的插入
 				std::cout << "请输入新增图书的信息:\n";
@@ -156,7 +169,10 @@ int main()
 				std::cout << std::endl;
 				break;
 			case 11://双向链表的写文件
+				//writefile.open("new book.txt");//定向绑定new book.txt
+				/*这里是存盘新信息（供阅读用）*/
 				writefile.open("new book.txt");//定向绑定new book.txt
+
 				if(!writefile.is_open())//文件打开成功与否的检查
 				{
 					std::cout << "文件打开失败，请检查\n";
@@ -164,7 +180,7 @@ int main()
 				}
 				else
 				{ 
-					std::cout << "文件打开成功，图书系统正在进行信息输出:\n";
+					std::cout << "文件打开成功，图书系统正在进行信息（阅读用）输出:\n";
 					writefile << "当前图书系统信息输出:\n";
 					writefile << "序号" << "\t" << std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
 					//L = new DuLinkList;
@@ -183,7 +199,38 @@ int main()
 					writefile << std::endl;
 					writefile.close();
 					std::cout << "图书系统输出完成\n";
+					//break;
+				}
+				/*这里是存盘新信息（供读取用）*/
+				writefile.open("new book read.txt");//定向绑定new book.txt
+
+				if (!writefile.is_open())//文件打开成功与否的检查
+				{
+					std::cout << "文件打开失败，请检查\n";
 					break;
+				}
+				else
+				{
+					std::cout << "文件打开成功，图书系统正在进行信息（读取用）输出:\n";
+					//writefile << "当前图书系统信息输出:\n";
+					writefile <<std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
+					//L = new DuLinkList;
+					p = L->next;
+					//count = 0;//序号统计，便于借书使用
+					while (p)
+					{
+						//count = 1;
+						writefile<<std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+						//writefile << "----------------------------------------------------------------------------------------------" << std::endl;
+						p = p->next;
+					}
+					p = Total(L);
+					//writefile << std::left << std::setw(15) << "总计" << std::left << std::setw(50) << "   " << "\t\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(15) << p->data.number << std::endl;
+					std::cout << std::endl;
+					writefile << " ";
+					writefile.close();
+					std::cout << "图书系统输出完成\n";
+					//break;
 				}
 		}
 	}
