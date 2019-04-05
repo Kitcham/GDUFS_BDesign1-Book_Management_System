@@ -62,8 +62,8 @@ int main()
 				std::cout << "请输入书名："; std::cin >> e.name;
 				std::cout << "请输入价格："; std::cin >> e.price;
 				std::cout << "请输入数量："; std::cin >> e.number;
-				status = IfEmpty(L,a);
-				if (!status) break;//判表空
+				status = IfEmpty(L,a);//指示用户是否接受头部插入，不接受则退回主菜单
+				if (!status) break;//判表空，空则让用户选择是否头部插入
 				if (ListInsert_DuL(L, a, e))
 					std::cout << "新增图书信息成功.\n\n";
 				else
@@ -72,7 +72,7 @@ int main()
 			case 4: //修改图书信息
 				std::cout << "请输入你要修改的图书的ISBN号:";
 				std::cin >> ISBNTEMP;
-				p = ISBNcompare(L, ISBNTEMP);
+				p = ISBNcompare(L, ISBNTEMP);//比对ISBN信息，获取匹配位置
 				if (p)
 				{
 					std::cout << "检索成功，当前书名为：《" << p->data.name << "》\t" << "当前价格为：" << p->data.price << std::endl;
@@ -143,7 +143,7 @@ int main()
 				std::cout << "序号" << "\t" << std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
 				//L = new DuLinkList;
 				p = L->next;
-				count = 0;
+				count = 0;//序号统计，便于借书使用
 				while (p)
 				{
 					//count = 1;
@@ -156,8 +156,8 @@ int main()
 				std::cout << std::endl;
 				break;
 			case 11://双向链表的写文件
-				writefile.open("new book.txt");
-				if(!writefile.is_open())
+				writefile.open("new book.txt");//定向绑定new book.txt
+				if(!writefile.is_open())//文件打开成功与否的检查
 				{
 					std::cout << "文件打开失败，请检查\n";
 					break;
@@ -169,7 +169,7 @@ int main()
 					writefile << "序号" << "\t" << std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
 					//L = new DuLinkList;
 					p = L->next;
-					count = 0;
+					count = 0;//序号统计，便于借书使用
 					while (p)
 					{
 						//count = 1;

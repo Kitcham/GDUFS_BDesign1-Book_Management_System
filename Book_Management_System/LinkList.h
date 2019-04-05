@@ -187,44 +187,25 @@ DuLNode* Total(DuLinkList L)    //统计书籍数量
 	return L;
 }
 
-char *my_strstr(const char *str, const char *str1) 
-{ 
-	char *p = (char *)str;	
-	char *s = (char *)str1;	
-	char *q = NULL;	
-	assert(str);	
-	assert(str1);	
-	while (*p) { 
-		q = p;		
-		while (*p && *s && (*p == *s)) 
-		{ 
-			p++;
-			s++; 
-		}		
-		if (*s == '\0') 
-		{ return q; }		
-		p++; 
-	}	
-	return 0; 
-}
 
-void FindBk(DuLinkList L, std::string bkt)
+void FindBk(DuLinkList L, std::string bkt)    //模糊检索图书
 {
-	int flag = 0;
+	int flag = 0;//指示是否检索到书目
 	DuLinkList p;
 	std::string a, b;
 	p = L->next;  /* 初始化，p指向第一个结点 */
 	std::cout << "已为你找到以下书目：\n";
 	std::cout << std::left << std::setw(15) << "ISBN号" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "价格" << "\t" << std::left << std::setw(15) << "数量" << std::endl;
 	while (p)
-	{ /* 顺指针向后查找，直到p指向的当前元素与e相等或p为空 */
+	{ /* 顺指针向后查找，直到p指向的当前元素ISBN匹配的图书 */
 		a = p->data.name;
-		const char *k = a.c_str();
+		const char *k = a.c_str();//两个const字符指针类型，用于使用子串匹配函数strstr()
 		const char *l = bkt.c_str();
-		if (strstr(k, l))
+		if (strstr(k, l))//子串匹配函数
 		{
 			flag = 1;
 			std::cout << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number << std::endl;
+			/* 当前图书ISBN匹配则输出，否则跳转下一个 */
 			//std::cout << a << std::endl;
 		}
 		p = p->next;
@@ -236,7 +217,7 @@ void FindBk(DuLinkList L, std::string bkt)
 	}
 }
 
-void Sort_books_prince(DuLinkList &L)
+void Sort_books_prince(DuLinkList &L)    //价格升序排序图书
 {
 	int n = 0;
 	DuLNode* star = L;
@@ -296,7 +277,7 @@ void Sort_books_prince(DuLinkList &L)
 	}
 }
 
-void Change_store(DuLinkList &L, int n, int shuliang)
+void Change_store(DuLinkList &L, int n, int shuliang)    //出借图书
 {
 	DuLNode* p = L->next;
 	int count1 = 1;
@@ -316,7 +297,7 @@ void Change_store(DuLinkList &L, int n, int shuliang)
 	}
 }
 
-void Return_book(DuLinkList &L, std::string buku, int num)
+void Return_book(DuLinkList &L, std::string buku, int num)    //归还图书
 {
 	DuLNode* p = L->next;
 
@@ -359,7 +340,7 @@ void Return_book(DuLinkList &L, std::string buku, int num)
 }
 
 
-int Search_book(DuLinkList &L, int xvhao)
+int Search_book(DuLinkList &L, int xvhao)    //按序号匹配图书
 {
 	DuLNode* p = L->next;
 	int count = 1;
@@ -377,36 +358,11 @@ int Search_book(DuLinkList &L, int xvhao)
 	}
 }
 
-bool Store_the_content(DuLinkList &L)
-{
-	std::ofstream ofile;               //定义输出文件
-	ofile.open("book.txt");
-	if (!ofile.is_open())
-	{
-		return 0;
-	}
-	else
-	{
-		DuLNode* p = L->next;
-		ofile << std::left << std::setw(15) << "ISBN" << "\t" << std::left << std::setw(50) << "书名" << "\t" << std::left << std::setw(5) << "定价" << "\t" << std::left << std::setw(5) << "数量" << std::endl;
-		while (p)
-		{
-			if (p->next)
-				ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number<< std::endl;
-			else
-				ofile << std::left << std::setw(15) << p->data.id << "\t" << std::left << std::setw(50) << p->data.name << "\t" << std::left << std::setw(5) << p->data.price << "\t" << std::left << std::setw(5) << p->data.number;
 
-			p = p->next;
-		}
-
-		ofile.close();
-	}
-}
-
-int IfEmpty(DuLinkList &L, int &a)
+int IfEmpty(DuLinkList &L, int &a)    //用于新增图示判表空
 {
 	DuLinkList s;
-	int flag = 0;
+	int flag = 0;//指示用户是否接受在头部插入
 	int cho;
 	if (L->next == NULL)
 	{
